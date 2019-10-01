@@ -2,15 +2,17 @@ import React, { Component } from "react";
 import { Button } from "./Button";
 import { Input } from "./Input";
 import { ClearButton } from "./ClearButton";
-import { evaluate } from "mathjs";
+import { evaluate, sqrt } from "mathjs";
 import "../calculator.css";
 
 export default class Display extends Component {
   state = {
     input: "",
-    style: "",
     darkMode: false,
-    isScien: ""
+    signMode: false,
+    arg1: "",
+    opt: "",
+    arg2: ""
   };
   componentDidMount() {
     const savedMode = JSON.parse(localStorage.getItem("dark"));
@@ -19,23 +21,162 @@ export default class Display extends Component {
     }
   }
 
+  isDigit(n) {
+    return !isNaN(Number(n));
+  }
+
   addToInput = val => {
-    this.setState({ input: this.state.input + val });
+    const { arg1, opt, arg2 } = this.state;
+    val = String(val);
+    if (!arg1) {
+      this.setState({ arg1: val }, () => this.displayInp());
+      return;
+    }
+    if (arg1 && !opt) {
+      if (this.isDigit(val)) {
+        this.setState({ arg1: this.state.arg1 + val }, () => this.displayInp());
+      } else {
+        this.setState({ opt: val }, () => this.displayInp());
+      }
+      return;
+    }
+    if (arg1 && opt && !arg2) {
+      if (this.isDigit(val)) {
+        this.setState({ arg2: val }, () => this.displayInp());
+      } else {
+        this.setState({ opt: val }, () => this.displayInp());
+      }
+    }
+    if (arg1 && opt && arg2) {
+      if (this.isDigit(val)) {
+        this.setState({ arg2: this.state.arg2 + val }, () => this.displayInp());
+      } else {
+        this.setState(
+          {
+            opt: val,
+            arg1: String(evaluate(`${arg1}${opt}${arg2}`)),
+            arg2: ""
+          },
+          () => this.displayInp()
+        );
+      }
+    }
+  };
+
+  displayInp = () => {
+    const { arg1, arg2 } = this.state;
+    if (arg2) {
+      this.setState({ input: this.state.arg2 });
+    }
+    if (!arg2 && arg1) {
+      this.setState({ input: this.state.arg1 });
+    }
+    if (!arg2 && !arg1) {
+      this.setState({ input: "0" });
+    }
   };
 
   handleEqual = () => {
-    this.setState({ input: evaluate(this.state.input) });
+    const { arg1, opt, arg2 } = this.state;
+
+    if (arg2) {
+      this.setState(
+        {
+          arg1: String(evaluate(`${arg1}${opt}${arg2}`)),
+          arg2: ""
+        },
+        () => this.displayInp()
+      );
+    }
+    if (!arg2 && arg1) {
+      this.setState({ opt: "" }, () => this.displayInp());
+    }
   };
 
   setDarkMode = () => {
     this.setState({ darkMode: !this.state.darkMode });
     localStorage.setItem("dark", JSON.stringify(!this.state.darkMode));
   };
+  setSignMode = () => {
+    this.setState({ signMode: !this.state.signMode });
+  };
+
+  processPlusMinusToggle = () => {
+    const { input } = this.state;
+    if (input) {
+      const newData = parseFloat(input) * -1;
+      this.setState({ arg1: String(newData) }, () => this.displayInp());
+    }
+  };
+
+  processPoint = () => {
+    const { input } = this.state;
+    var dot = ".";
+    console.log("pp", input, input && input.includes(dot));
+    if (input && !input.includes(dot)) {
+      const newData = String(input + ".");
+      console.log(this.state.agr2, "inside in point", newData);
+      if (this.state.arg2) {
+        console.log("change arg 2", this.state.agr2);
+        this.setState({ arg2: String(newData) }, () => this.displayInp());
+      } else {
+        console.log("change arg 1", this.state.agr2);
+        this.setState({ arg1: String(newData) }, () => this.displayInp());
+      }
+    }
+  };
+  processSquareRoot = () => {
+    const { input } = this.state;
+    if (input) {
+      const newData = sqrt(input);
+      this.setState({ arg1: String(newData) }, () => this.displayInp());
+    }
+  };
+  processSquare = () => {
+    const { input } = this.state;
+    if (input) {
+      const newData = input * input;
+      console.log(newData, "new Sq");
+      this.setState({ arg1: String(newData) }, () => this.displayInp());
+    }
+  };
+  processUnknownKey = val => {
+    console.error("processUnknownKey", val);
+  };
+  //Logic for scientific Mode
+  processFunctionKey(val) {
+    switch (val) {
+      case "±":
+        // console.log(val, "process");
+        this.processPlusMinusToggle(val);
+        break;
+      case ".":
+        this.processPoint();
+        break;
+      case "X2":
+        this.processSquare();
+        break;
+      case "√":
+        this.processSquareRoot();
+        break;
+      default:
+        this.processUnknownKey(val);
+    }
+  }
 
   render() {
+    console.log(
+      this.state.input,
+      "||",
+      this.state.arg1,
+      "||",
+      this.state.opt,
+      "||",
+      this.state.arg2
+    );
     const { darkMode } = this.state;
     const isNormal = [1, 2, 3, "+", 4, 5, 6, "-", 7, 8, 9, "*"];
-    // const themes = ["Light Theme", "Dark Theme"];
+    const signModeArr = ["±", ".", "√", "X2"];
     return (
       <div className={`${darkMode ? " is-parant-wrapper dark" : "light"}`}>
         <div className="wrapper">
@@ -75,13 +216,27 @@ export default class Display extends Component {
                 ))}
               </div>
               <div className="row">
+                {this.state.signMode
+                  ? signModeArr.map((val, i) => (
+                      <Button
+                        key={val}
+                        theme={darkMode ? "dark-mode" : "light-mode"}
+                        handleClick={() => this.processFunctionKey(val)}
+                      >
+                        {val}
+                      </Button>
+                    ))
+                  : ""}
+              </div>
+              <div className="row">
                 <ClearButton
                   theme={darkMode ? "dark-mode" : "light-mode"}
-                  handleClear={() => this.setState({ input: "" })}
+                  handleClear={() =>
+                    this.setState({ input: "", arg1: "", arg2: "", opt: "" })
+                  }
                 >
                   AC
                 </ClearButton>
-                {/* <Button handleClick={this.addToInput}>.</Button> */}
                 <Button
                   theme={darkMode ? "dark-mode" : "light-mode"}
                   handleClick={this.addToInput}
