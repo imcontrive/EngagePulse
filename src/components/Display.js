@@ -12,6 +12,12 @@ export default class Display extends Component {
     darkMode: false,
     isScien: ""
   };
+  componentDidMount() {
+    const savedMode = JSON.parse(localStorage.getItem("dark"));
+    if (savedMode) {
+      this.setState({ darkMode: savedMode });
+    }
+  }
 
   addToInput = val => {
     this.setState({ input: this.state.input + val });
@@ -29,7 +35,7 @@ export default class Display extends Component {
   render() {
     const { darkMode } = this.state;
     const isNormal = [1, 2, 3, "+", 4, 5, 6, "-", 7, 8, 9, "*"];
-    const themes = ["Light Theme", "Dark Theme"];
+    // const themes = ["Light Theme", "Dark Theme"];
     return (
       <div className={`${darkMode ? " is-parant-wrapper dark" : "light"}`}>
         <div className="wrapper">
