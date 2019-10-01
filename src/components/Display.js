@@ -9,7 +9,8 @@ export default class Display extends Component {
   state = {
     input: "",
     style: "",
-    darkMode: false
+    darkMode: false,
+    isScien: ""
   };
 
   addToInput = val => {
@@ -35,18 +36,21 @@ export default class Display extends Component {
           <h3 className="is-heading">Simple Calculator</h3>
           <div className="is-calcWrapper">
             <div className="is-theme-btns">
-              {themes.map((theme, i) => (
+              <button
+                className={darkMode ? "sign-mode btn light" : "sign-mode btn"}
+                onClick={() => this.setSignMode()}
+              >
+                Scientific Mode
+              </button>
+              <span>
                 <button
-                  className={
-                    darkMode && theme === "Dark Theme" ? "btn active" : "btn"
-                  }
-                  key={i}
+                  className={darkMode ? "btn active dark" : "btn light"}
                   type="submit"
                   onClick={() => this.setDarkMode()}
                 >
-                  {theme}
+                  {!darkMode ? "Dark Theme" : "Light Mode"}
                 </button>
-              ))}
+              </span>
             </div>
             <div className="calc-wrapper">
               <Input
