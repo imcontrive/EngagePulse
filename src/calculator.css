@@ -4,20 +4,27 @@
   justify-content: center;
   align-items: center;
   font-weight: lighter;
-  font-size: 2.4rem;
+  font-size: 2rem;
   flex: 1;
 }
+
 .light-mode {
   background-color: #f0f0f0;
   color: #000000;
   outline: 0.25px solid #000000;
   transition: background-color 0.25s ease-out;
 }
+.light-mode:hover {
+  background-color: #d6d5d5;
+}
 .dark-mode {
   background: #666;
   color: #fff;
   outline: 0.25px solid #f0f0f0;
   transition: background-color 0.25s ease-out;
+}
+.dark-mode:hover {
+  background-color: rgb(59, 59, 59);
 }
 
 .box {
@@ -36,7 +43,7 @@
   justify-content: center;
   align-items: center;
   font-weight: lighter;
-  font-size: 2.4rem;
+  font-size: 2rem;
   flex: 1;
 }
 
@@ -47,6 +54,6 @@
   justify-content: flex-end;
   align-items: center;
   font-weight: bold;
-  font-size: 4.4rem;
+  font-size: 3rem;
   padding: 0.5rem 1rem;
 }
