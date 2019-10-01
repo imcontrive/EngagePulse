@@ -3,12 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "font-awesome": "^4.7.0",
     "mathjs": "^6.2.2",
     "react": "^16.8.6",
-    "react-redux": "^6.0.1",
-    "react-scripts": "2.1.8",
-    "redux": "^4.0.1"
+    "react-scripts": "2.1.8"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -181,7 +181,7 @@ export default class Display extends Component {
                   type="submit"
                   onClick={() => this.setDarkMode()}
                 >
-                  {!darkMode ? "Dark Theme" : "Light Mode"}
+                  {!darkMode ? "Dark Theme" : "Light Theme"}
                 </button>
               </span>
             </div>
