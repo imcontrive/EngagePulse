@@ -8,83 +8,89 @@ import "../calculator.css";
 export default class Display extends Component {
   state = {
     input: "",
-    style: ""
+    style: "",
+    darkMode: false
   };
 
-  // add to Input
   addToInput = val => {
     this.setState({ input: this.state.input + val });
   };
 
-  // HandleEqual
   handleEqual = () => {
     this.setState({ input: evaluate(this.state.input) });
   };
 
-  // Logic for Themes
-  themeHandler = str => {
-    console.log(str);
+  setDarkMode = () => {
+    this.setState({ darkMode: !this.state.darkMode });
+    localStorage.setItem("dark", JSON.stringify(!this.state.darkMode));
   };
 
   render() {
+    const { darkMode } = this.state;
     const isNormal = [1, 2, 3, "+", 4, 5, 6, "-", 7, 8, 9, "*"];
+    const themes = ["Light Theme", "Dark Theme"];
     return (
-      <div className="isParentWrapper">
-        <h3 className="isHeading">Simple Calculator</h3>
-        <div className="isCalcWrapper">
-          <div className="isThemeBtns">
-            <button
-              className="btn"
-              type="submit"
-              onClick={() => this.themeHandler("light")}
-            >
-              Light Theme
-            </button>
-            <button
-              className="btn"
-              type="submit"
-              onClick={() => this.themeHandler("dark")}
-            >
-              Dark Theme
-            </button>
-          </div>
-          <div className="calc-wrapper">
-            <Input input={this.state.input} />
-            <div className="row">
-              <Button handleClick={this.addToInput}>1</Button>
-              <Button handleClick={this.addToInput}>2</Button>
-              <Button handleClick={this.addToInput}>3</Button>
-              <Button handleClick={this.addToInput}>+</Button>
+      <div className={`${darkMode ? " is-parant-wrapper dark" : "light"}`}>
+        <div className="wrapper">
+          <h3 className="is-heading">Simple Calculator</h3>
+          <div className="is-calcWrapper">
+            <div className="is-theme-btns">
+              {themes.map((theme, i) => (
+                <button
+                  className={
+                    darkMode && theme === "Dark Theme" ? "btn active" : "btn"
+                  }
+                  key={i}
+                  type="submit"
+                  onClick={() => this.setDarkMode()}
+                >
+                  {theme}
+                </button>
+              ))}
             </div>
-            <div className="row">
-              <Button handleClick={this.addToInput}>4</Button>
-              <Button handleClick={this.addToInput}>5</Button>
-              <Button handleClick={this.addToInput}>6</Button>
-              <Button handleClick={this.addToInput}>-</Button>
-            </div>
-            <div className="row">
-              <Button handleClick={this.addToInput}>7</Button>
-              <Button handleClick={this.addToInput}>8</Button>
-              <Button handleClick={this.addToInput}>9</Button>
-              <Button handleClick={this.addToInput}>*</Button>
-            </div>
-
-            {/* <div className="row">
-            {isNormal.map(val => (
-              <Button className="box" key={val} handleClick={this.addToInput}>
-                {val}
-              </Button>
-            ))}
-          </div> */}
-
-            <div className="row">
-              <ClearButton handleClear={() => this.setState({ input: "" })}>
-                AC
-              </ClearButton>
-              {/* <Button handleClick={this.addToInput}>.</Button> */}
-              <Button handleClick={this.addToInput}>0</Button>
-              <Button handleClick={() => this.handleEqual()}>=</Button>
-              <Button handleClick={this.addToInput}>/</Button>
+            <div className="calc-wrapper">
+              <Input
+                theme={darkMode ? "dark-mode" : "light-mode"}
+                input={this.state.input}
+              />
+              <div className="row box">
+                {isNormal.map(val => (
+                  <Button
+                    key={val}
+                    theme={darkMode ? "dark-mode" : "light-mode"}
+                    handleClick={this.addToInput}
+                  >
+                    {val}
+                  </Button>
+                ))}
+              </div>
+              <div className="row">
+                <ClearButton
+                  theme={darkMode ? "dark-mode" : "light-mode"}
+                  handleClear={() => this.setState({ input: "" })}
+                >
+                  AC
+                </ClearButton>
+                {/* <Button handleClick={this.addToInput}>.</Button> */}
+                <Button
+                  theme={darkMode ? "dark-mode" : "light-mode"}
+                  handleClick={this.addToInput}
+                >
+                  0
+                </Button>
+                <Button
+                  theme={darkMode ? "dark-mode" : "light-mode"}
+                  handleClick={() => this.handleEqual()}
+                >
+                  =
+                </Button>
+                <Button
+                  theme={darkMode ? "dark-mode" : "light-mode"}
+                  handleClick={this.addToInput}
+                >
+                  /
+                </Button>
+              </div>
             </div>
           </div>
         </div>

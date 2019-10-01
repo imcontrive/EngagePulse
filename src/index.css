@@ -154,51 +154,53 @@ a {
 /**** Main CSS *******/
 
 body {
-  background: snow;
-  color: black;
   font-family: "Roboto", sans-serif;
   line-height: 1.5;
 }
-
-.isParentWrapper {
+.dark {
+  background: #000;
+  color: #fff;
+}
+.light {
+  background: #fff;
+}
+.is-parant-wrapper {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+}
+.wrapper {
   max-width: 750px;
   width: 100%;
   margin: 0 auto;
-  /* padding: 2rem 4rem; */
   text-align: center;
 }
-.isHeading {
+.is-heading {
   font-size: 2rem;
   font-weight: 700;
   word-spacing: 0.25rem;
   letter-spacing: 1px;
-  margin: 1rem auto;
+  padding: 1rem;
   text-transform: uppercase;
   text-decoration: underline;
 }
-.isThemeBtns {
+.is-theme-btns {
   display: flex;
   justify-content: flex-end;
   margin: 0.5rem 0;
 }
-.isThemeBtns .btn {
+.is-theme-btns .btn {
   padding: 0.5rem 1.5rem;
   border: 1px solid black;
   margin: 0.015rem;
   font-weight: 500;
   font-size: 1rem;
 }
-.btn:hover {
+/* .btn:hover {
   color: #1f8eb7;
   box-shadow: 0 0 0 1px #1f8eb7;
   transition: box-shadow 0.6s linear;
-}
-/* .app {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100%;
 } */
 
 .row {
@@ -206,6 +208,8 @@ body {
   width: 100%;
 }
 
-.row .box > * {
-  flex: 1 1 160px;
+.active {
+  background: rgb(19, 18, 18);
+  color: white;
+  border: 1px solid rgb(44, 43, 43);
 }

@@ -5,11 +5,21 @@
   align-items: center;
   font-weight: lighter;
   font-size: 1.4em;
-  background-color: #e0e1e6;
-  color: #888888;
   flex: 1;
-  outline: 1px solid #888888;
 }
+.light-mode {
+  background-color: #f0f0f0;
+  color: #000000;
+  outline: 0.25px solid #000000;
+  transition: background-color 0.25s ease-out;
+}
+.dark-mode {
+  background: #666;
+  color: #fff;
+  outline: 0.25px solid #f0f0f0;
+  transition: background-color 0.25s ease-out;
+}
+
 .box {
   display: flex;
   flex-wrap: wrap;
@@ -19,10 +29,6 @@
   flex: 1 1 160px;
 }
 
-.operator {
-  background-color: #fe9241;
-  color: #ffffff;
-}
 /* Clear Button */
 .clear-btn {
   height: 4em;
@@ -31,10 +37,7 @@
   align-items: center;
   font-weight: lighter;
   font-size: 1.4em;
-  background-color: #c5c3cd;
-  color: #000000;
   flex: 1;
-  outline: 1px solid #888888;
 }
 
 /* Input */
@@ -45,8 +48,5 @@
   align-items: center;
   font-weight: bold;
   font-size: 1.4em;
-  background-color: #000000;
-  color: #ffffff;
   padding: 0.5rem 1rem;
-  outline: 1px solid #888888;
 }
