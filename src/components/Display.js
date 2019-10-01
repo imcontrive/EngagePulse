@@ -112,15 +112,11 @@ export default class Display extends Component {
   processPoint = () => {
     const { input } = this.state;
     var dot = ".";
-    console.log("pp", input, input && input.includes(dot));
     if (input && !input.includes(dot)) {
       const newData = String(input + ".");
-      console.log(this.state.agr2, "inside in point", newData);
       if (this.state.arg2) {
-        console.log("change arg 2", this.state.agr2);
         this.setState({ arg2: String(newData) }, () => this.displayInp());
       } else {
-        console.log("change arg 1", this.state.agr2);
         this.setState({ arg1: String(newData) }, () => this.displayInp());
       }
     }
@@ -147,7 +143,6 @@ export default class Display extends Component {
   processFunctionKey(val) {
     switch (val) {
       case "±":
-        // console.log(val, "process");
         this.processPlusMinusToggle(val);
         break;
       case ".":
@@ -165,15 +160,6 @@ export default class Display extends Component {
   }
 
   render() {
-    console.log(
-      this.state.input,
-      "||",
-      this.state.arg1,
-      "||",
-      this.state.opt,
-      "||",
-      this.state.arg2
-    );
     const { darkMode } = this.state;
     const isNormal = [1, 2, 3, "+", 4, 5, 6, "-", 7, 8, 9, "*"];
     const signModeArr = ["±", ".", "√", "X2"];
