@@ -1,0 +1,52 @@
+.button-wrapper {
+  height: 4em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: lighter;
+  font-size: 1.4em;
+  background-color: #e0e1e6;
+  color: #888888;
+  flex: 1;
+  outline: 1px solid #888888;
+}
+.box {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.box > * {
+  flex: 1 1 160px;
+}
+
+.operator {
+  background-color: #fe9241;
+  color: #ffffff;
+}
+/* Clear Button */
+.clear-btn {
+  height: 4em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: lighter;
+  font-size: 1.4em;
+  background-color: #c5c3cd;
+  color: #000000;
+  flex: 1;
+  outline: 1px solid #888888;
+}
+
+/* Input */
+.input {
+  height: 4em;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.4em;
+  background-color: #000000;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  outline: 1px solid #888888;
+}
