@@ -165,10 +165,9 @@ body {
   background: #fff;
 }
 .is-parant-wrapper {
-  height: 100vh;
   width: 100vw;
+  height: 100vh;
   margin: 0;
-  padding: 0;
 }
 .wrapper {
   max-width: 750px;
@@ -197,11 +196,6 @@ body {
   font-weight: 500;
   font-size: 1rem;
 }
-/* .btn:hover {
-  color: #1f8eb7;
-  box-shadow: 0 0 0 1px #1f8eb7;
-  transition: box-shadow 0.6s linear;
-} */
 
 .row {
   display: flex;
@@ -212,4 +206,86 @@ body {
   background: rgb(19, 18, 18);
   color: white;
   border: 1px solid rgb(44, 43, 43);
+}
+
+/* Calculator */
+.button-wrapper {
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: lighter;
+  font-size: 2rem;
+  flex: 1;
+}
+
+.light-mode {
+  background-color: #f0f0f0;
+  color: #000000;
+  outline: 0.25px solid #000000;
+  transition: background-color 0.25s ease-out;
+}
+.light-mode:hover {
+  background-color: #d6d5d5;
+}
+.dark-mode {
+  background: #666;
+  color: #fff;
+  outline: 0.25px solid #f0f0f0;
+  transition: background-color 0.25s ease-out;
+}
+.dark-mode:hover {
+  background-color: rgb(59, 59, 59);
+}
+
+.box {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.box > * {
+  flex: 1 1 160px;
+}
+
+/* Clear Button */
+.clear-btn {
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: lighter;
+  font-size: 2rem;
+  flex: 1;
+}
+
+/* Input */
+.input {
+  height: 5rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-weight: bold;
+  font-size: 3rem;
+  padding: 0.5rem 1rem;
+}
+
+@media all and (max-width: 630px) {
+  .is-parant-wrapper {
+    padding: 1.5rem 0.25rem;
+  }
+  .is-heading {
+    font-size: 1.5rem;
+  }
+
+  .is-theme-btns {
+    padding: 1rem;
+  }
+  .button-wrapper,
+  .clear-btn {
+    height: 4rem;
+  }
+
+  .box > * {
+    flex: 1 1 85px;
+  }
 }

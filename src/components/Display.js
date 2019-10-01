@@ -3,7 +3,6 @@ import { Button } from "./Button";
 import { Input } from "./Input";
 import { ClearButton } from "./ClearButton";
 import { evaluate, sqrt } from "mathjs";
-import "../calculator.css";
 
 export default class Display extends Component {
   state = {
@@ -167,7 +166,7 @@ export default class Display extends Component {
       <div className={`${darkMode ? " is-parant-wrapper dark" : "light"}`}>
         <div className="wrapper">
           <h3 className="is-heading">Simple Calculator</h3>
-          <div className="is-calcWrapper">
+          <div className="is-calc-wrapper">
             <div className="is-theme-btns">
               <button
                 className={darkMode ? "sign-mode btn light" : "sign-mode btn"}
